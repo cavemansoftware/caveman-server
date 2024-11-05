@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Caveman Software Official Server Modules";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
