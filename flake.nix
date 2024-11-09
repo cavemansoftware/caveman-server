@@ -3,6 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs. 
+        nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -11,7 +16,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    pkgs = nixpkgs.legacyPackages.legacyPackages.x86_64-linux;
+    pkgs = inputs.nixpkgs.legacyPackages.legacyPackages.x86_64-linux;
   in {
     nixosConfigurations = {
       tauri = nixpkgs.lib.nixosSystem {
