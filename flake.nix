@@ -14,16 +14,13 @@
     self,
     nixpkgs,
     ...
-  } @ inputs: let
-    inherit (self) outputs;
-    pkgs = inputs.nixpkgs.legacyPackages.legacyPackages.x86_64-linux;
-  in {
+  } @ inputs: {
     nixosConfigurations = {
       tauri = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit self inputs outputs;};
+        specialArgs = {inherit self inputs;};
         modules = [./hosts/tauri];
       };
     };
-    formatter.x86_64-linux = pkgs.alejandra;
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }
